@@ -1,5 +1,12 @@
 # DeepSeek Agent - Chrome Extension
 
+![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=flat&logo=javascript&logoColor=%23F7DF1E)
+![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=flat&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=flat&logo=css3&logoColor=white)
+![Chrome](https://img.shields.io/badge/chrome--extension-Manifest%20V3-4285F4.svg?style=flat&logo=googlechrome&logoColor=white)
+![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat)
+![Model](https://img.shields.io/badge/model-DeepSeek_Flash-0052cc.svg?style=flat)
+
 DeepSeek Agent is a Chrome extension that provides an AI agent within a sidebar. It uses DeepSeek's API to analyze the pages you visit, extract data, and assist you with various tasks seamlessly while you browse.
 
 ## Features
