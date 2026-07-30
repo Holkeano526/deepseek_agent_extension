@@ -15,6 +15,16 @@
         <span id="title">DeepSeek</span>
       </div>
       <div id="headerActions">
+        <button id="adversarialBtn" title="Adversarial Lab — Pruebas de Alto Calibre" aria-label="Adversarial Lab">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+            stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10" fill="none"></circle>
+            <path d="M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20z" fill="none"></path>
+            <line x1="12" y1="8" x2="12" y2="12"></line>
+            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+            <circle cx="12" cy="12" r="3" fill="currentColor" opacity="0.6"></circle>
+          </svg>
+        </button>
         <button id="whitehatBtn" title="White Hat Exploitation Tools" aria-label="White Hat Tools">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
             stroke-linecap="round" stroke-linejoin="round">
@@ -190,9 +200,16 @@
 
   <!-- Developer Options Modal -->
   <div id="devToolsModal" class="hidden">
-    <div id="devToolsContent" class="premium-modal">
+    <div id="devToolsContent" class="premium-modal" style="max-width: 360px;">
       <div class="modal-header">
-        <h3>Developer Options</h3>
+        <h3>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"
+            style="vertical-align: middle; margin-right: 6px;">
+            <polyline points="16 18 22 12 16 6"></polyline>
+            <polyline points="8 6 2 12 8 18"></polyline>
+          </svg>
+          Developer Options
+        </h3>
         <button id="closeDevToolsBtn" class="icon-btn" title="Cerrar">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
             stroke-linejoin="round" width="16" height="16">
@@ -203,43 +220,51 @@
       </div>
       <p class="modal-hint">Ejecuta análisis avanzados usando la conexión CDP (Chrome DevTools Protocol).</p>
 
-      <div class="dev-actions-grid">
-        <button class="dev-action-btn" data-action="performance">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <polyline points="13 2 13 9 22 9"></polyline>
-            <path d="M13 2L3 14h9l-1 8 11-13h-9z"></path>
-          </svg>
-          <div class="dev-action-text">
+      <div class="wh-tools-list">
+        <button class="wh-tool-btn dev-action-btn" data-action="performance">
+          <span class="wh-tool-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+              <polyline points="13 2 13 9 22 9"></polyline>
+              <path d="M13 2L3 14h9l-1 8 11-13h-9z"></path>
+            </svg>
+          </span>
+          <div class="wh-tool-text">
             <strong>Rendimiento</strong>
             <span>Auditoría HTML/Red</span>
           </div>
         </button>
-        <button class="dev-action-btn" data-action="security">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-          </svg>
-          <div class="dev-action-text">
+        <button class="wh-tool-btn dev-action-btn" data-action="security">
+          <span class="wh-tool-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            </svg>
+          </span>
+          <div class="wh-tool-text">
             <strong>Seguridad</strong>
             <span>XSS, Scripts y Cabeceras</span>
           </div>
         </button>
-        <button class="dev-action-btn" data-action="seo">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="11" cy="11" r="8"></circle>
-            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-          </svg>
-          <div class="dev-action-text">
+        <button class="wh-tool-btn dev-action-btn" data-action="seo">
+          <span class="wh-tool-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          </span>
+          <div class="wh-tool-text">
             <strong>Auditoría SEO</strong>
             <span>Semántica y Meta tags</span>
           </div>
         </button>
-        <button class="dev-action-btn" data-action="frontend">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-            <line x1="3" y1="9" x2="21" y2="9"></line>
-            <line x1="9" y1="21" x2="9" y2="9"></line>
-          </svg>
-          <div class="dev-action-text">
+        <button class="wh-tool-btn dev-action-btn" data-action="frontend">
+          <span class="wh-tool-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="3" y1="9" x2="21" y2="9"></line>
+              <line x1="9" y1="21" x2="9" y2="9"></line>
+            </svg>
+          </span>
+          <div class="wh-tool-text">
             <strong>Stack Frontend</strong>
             <span>Frameworks y Librerías</span>
           </div>
@@ -543,6 +568,219 @@
     </div>
   </div>
 
+  <!-- ===== ADVERSARIAL LAB — BLACKHAT TOOLS ===== -->
+  <div id="adversarialModal" class="hidden">
+    <div id="adversarialContent" class="premium-modal" style="max-width: 380px;">
+      <div class="modal-header">
+        <h3>
+          <svg viewBox="0 0 24 24" fill="none" stroke="#ff4444" stroke-width="2" width="16" height="16"
+            style="vertical-align: middle; margin-right: 6px;">
+            <circle cx="12" cy="12" r="10" fill="none"></circle>
+            <path d="M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20z" fill="none"></path>
+            <circle cx="12" cy="12" r="3" fill="#ff4444" opacity="0.6"></circle>
+          </svg>
+          <span style="color: #ff4444;">Adversarial Lab</span>
+        </h3>
+        <button id="closeAdversarialBtn" class="icon-btn" title="Cerrar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round" width="16" height="16">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <!-- LEGAL DISCLAIMER -->
+      <div id="advDisclaimer" class="adv-disclaimer">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#f44336" stroke-width="2" width="16" height="16">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="8" x2="12" y2="12"></line>
+          <line x1="12" y1="16" x2="12.01" y2="16"></line>
+        </svg>
+        <div>
+          <strong style="color: #f44336;">⚠️ USO RESTRINGIDO</strong>
+          <p style="font-size: 11px; color: #888; margin: 4px 0 0;">Estas herramientas pueden generar tráfico de red y
+            modificar el DOM de la página activa. Úsalas <strong>SOLO</strong> en tus propios proyectos o con
+            autorización explícita por escrito.</p>
+          <div style="margin-top: 8px;">
+            <label style="display: flex; align-items: flex-start; gap: 6px; font-size: 11px; cursor: pointer;">
+              <input type="checkbox" id="advDisclaimerAccept" style="margin-top: 2px;">
+              <span>Acepto los términos y condiciones. Confirmo que tengo autorización para realizar pruebas de
+                seguridad en el objetivo actual.</span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Target Info -->
+      <div id="advTargetInfo" class="adv-target-info hidden">
+        <div style="display: flex; align-items: center; gap: 6px;">
+          <span class="adv-target-icon">🎯</span>
+          <span id="advTargetUrl"
+            style="font-size: 11px; color: #aaa; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1;"></span>
+        </div>
+        <div style="display: flex; gap: 6px; margin-top: 6px;">
+          <span id="advSessionId" class="adv-badge">Sesión: ---</span>
+          <span id="advModeBadge" class="adv-badge adv-badge-safe">🔒 Safe Mode</span>
+        </div>
+      </div>
+
+      <!-- Safe Mode Toggle -->
+      <div class="adv-safe-toggle">
+        <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+          <span style="font-size: 11px; font-weight: 600;">🔒 SAFE MODE</span>
+          <div class="adv-toggle-track" id="advSafeToggle">
+            <div class="adv-toggle-thumb" id="advSafeThumb"></div>
+          </div>
+          <span style="font-size: 11px; color: #888;">⚡ ACTIVE</span>
+        </label>
+        <span style="font-size: 10px; color: #666;">Safe mode = solo genera payloads, no los envía</span>
+      </div>
+
+      <!-- Tool List (Same layout as White Hat Tools) -->
+      <div class="wh-tools-list">
+        <button class="wh-tool-btn adv-run-btn" data-adv-tool="sqli">
+          <span class="wh-tool-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#ff3333" stroke-width="2" width="18" height="18">
+              <polyline points="23 4 23 10 17 10"></polyline>
+              <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+            </svg>
+          </span>
+          <span class="wh-tool-text">
+            <strong>SQL Injection Fuzzer</strong>
+            <span>prueba parámetros URL con payloads de inyección SQL</span>
+          </span>
+        </button>
+
+        <button class="wh-tool-btn adv-run-btn" data-adv-tool="xss">
+          <span class="wh-tool-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#ffaa00" stroke-width="2" width="18" height="18">
+              <polyline points="16 18 22 12 16 6"></polyline>
+              <polyline points="8 6 2 12 8 18"></polyline>
+            </svg>
+          </span>
+          <span class="wh-tool-text">
+            <strong>XSS Arsenal</strong>
+            <span>genera e inyecta payloads XSS contextuales</span>
+            <select id="advXssContext" class="adv-select" style="margin-top: 6px; width: 100%; font-size: 11px; padding: 4px;" onclick="event.stopPropagation()">
+              <option value="html">HTML básico</option>
+              <option value="reflected">Reflejado / WAF Bypass</option>
+              <option value="dom">DOM-based</option>
+              <option value="svg">SVG XSS</option>
+              <option value="angular">Angular Template</option>
+            </select>
+          </span>
+        </button>
+
+        <button class="wh-tool-btn adv-run-btn" data-adv-tool="ssrf">
+          <span class="wh-tool-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#3399ff" stroke-width="2" width="18" height="18">
+              <path d="M5 12h14M12 5l7 7-7 7"></path>
+            </svg>
+          </span>
+          <span class="wh-tool-text">
+            <strong>SSRF Probe</strong>
+            <span>prueba endpoints de metadata cloud e IPs internas</span>
+          </span>
+        </button>
+
+        <button class="wh-tool-btn adv-run-btn" data-adv-tool="jwt">
+          <span class="wh-tool-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#ffcc00" stroke-width="2" width="18" height="18">
+              <circle cx="12" cy="12" r="10"></circle>
+              <circle cx="12" cy="12" r="3"></circle>
+            </svg>
+          </span>
+          <span class="wh-tool-text">
+            <strong>JWT Attacker</strong>
+            <span>detecta tokens y genera payloads (none alg, kid)</span>
+          </span>
+        </button>
+
+        <button class="wh-tool-btn adv-run-btn" data-adv-tool="lfi">
+          <span class="wh-tool-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#33ff33" stroke-width="2" width="18" height="18">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+            </svg>
+          </span>
+          <span class="wh-tool-text">
+            <strong>LFI/RFI Scanner</strong>
+            <span>prueba path traversal y PHP wrappers</span>
+          </span>
+        </button>
+
+        <button class="wh-tool-btn adv-run-btn" data-adv-tool="cmdi">
+          <span class="wh-tool-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#ff3333" stroke-width="2" width="18" height="18">
+              <polyline points="16 18 22 12 16 6"></polyline>
+              <polyline points="8 6 2 12 8 18"></polyline>
+            </svg>
+          </span>
+          <span class="wh-tool-text">
+            <strong>Command Injection</strong>
+            <span>payloads de inyección de comandos OS</span>
+          </span>
+        </button>
+
+        <button class="wh-tool-btn adv-run-btn" data-adv-tool="cors">
+          <span class="wh-tool-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#ffaa00" stroke-width="2" width="18" height="18">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="2" y1="12" x2="22" y2="12"></line>
+              <path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"></path>
+            </svg>
+          </span>
+          <span class="wh-tool-text">
+            <strong>CORS Exploiter</strong>
+            <span>verifica misconfiguraciones de CORS</span>
+          </span>
+        </button>
+      </div>
+
+      <!-- Progress -->
+      <div id="advProgress" class="hidden" style="margin-top: 8px;">
+        <div class="scan-progress-bar">
+          <div class="scan-progress-fill" id="advProgressFill"></div>
+        </div>
+        <p id="advProgressText" style="font-size: 11px; color: #aaa; margin-top: 4px;">Ejecutando...</p>
+      </div>
+
+      <!-- Results -->
+      <div id="advResults" class="hidden" style="margin-top: 8px;">
+        <div class="adv-results-header">
+          <strong style="font-size: 12px; color: #ff4444;">📊 Resultados</strong>
+          <span id="advResultCount" style="font-size: 11px; color: #888;">0 findings</span>
+        </div>
+        <div id="advFindingsList" style="max-height: 200px; overflow-y: auto;"></div>
+        <div class="adv-results-actions" style="display: flex; gap: 6px; margin-top: 8px;">
+          <button id="advToChatBtn" class="secondary-btn flex-1" style="font-size: 11px;">📤 DeepSeek</button>
+          <button id="advExportJsonBtn" class="secondary-btn flex-1" style="font-size: 11px;">💾 Export JSON</button>
+          <button id="advClearBtn" class="secondary-btn flex-1" style="font-size: 11px;">🗑️ Limpiar</button>
+        </div>
+      </div>
+
+      <!-- Session Logs (collapsible) -->
+      <details id="advLogSection" class="hidden" style="margin-top: 8px;">
+        <summary style="font-size: 11px; cursor: pointer; color: #888;">📋 Ver logs de sesión</summary>
+        <div id="advLogList"
+          style="max-height: 150px; overflow-y: auto; margin-top: 4px; font-size: 10px; color: #666;"></div>
+      </details>
+
+      <div class="adv-footer-note">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="10" height="10">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="16" x2="12" y2="12"></line>
+          <line x1="12" y1="8" x2="12.01" y2="8"></line>
+        </svg>
+        Solo para auditorías autorizadas. Rate limited: <span id="advRateDisplay">500ms</span> entre payloads.
+      </div>
+    </div>
+  </div>
+
+  <!-- CRITICAL: adversarial-payloads.js and adversarial-engine.js must load BEFORE sidebar.js -->
+  <script src="js/adversarial-payloads.js"></script>
+  <script src="js/adversarial-engine.js"></script>
   <script src="js/sidebar.js"></script>
 </body>
 
