@@ -781,11 +781,28 @@ body {
 }
 
 .bubble .code-block-wrapper {
-  position: relative;
   background: var(--bg-base);
   border: 1px solid var(--border-subtle);
   border-radius: 6px;
   margin: 10px 0;
+  overflow: hidden;
+}
+
+.code-header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  padding: 4px 8px;
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.code-lang {
+  font-size: 11px;
+  color: var(--text-muted);
+  font-family: var(--font-family);
+  text-transform: uppercase;
 }
 
 .bubble .code-block-wrapper pre {
@@ -1953,14 +1970,7 @@ body {
 }
 
 /* ── Code Blocks (Markdown) ── */
-.code-block-wrapper {
-  position: relative;
-}
-
 .copy-code-btn {
-  position: absolute;
-  top: 6px;
-  right: 6px;
   width: 24px;
   height: 24px;
   background: transparent;
@@ -1972,13 +1982,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  opacity: 0.6;
+  opacity: 0.8;
   transition: all 0.2s ease, transform 0.1s;
-  z-index: 10;
-}
-
-.code-block-wrapper:hover .copy-code-btn {
-  opacity: 1;
 }
 
 .copy-code-btn:hover {
