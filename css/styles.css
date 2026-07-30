@@ -1972,7 +1972,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  opacity: 0;
+  opacity: 0.6;
   transition: all 0.2s ease, transform 0.1s;
   z-index: 10;
 }
