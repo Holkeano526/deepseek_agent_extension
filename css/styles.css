@@ -780,6 +780,23 @@ body {
   overflow-x: auto;
 }
 
+.bubble .code-block-wrapper {
+  position: relative;
+  background: var(--bg-base);
+  border: 1px solid var(--border-subtle);
+  border-radius: 6px;
+  margin: 10px 0;
+  overflow: hidden;
+}
+
+.bubble .code-block-wrapper pre {
+  background: transparent;
+  border: none;
+  margin: 0;
+  padding: 12px;
+  padding-bottom: 32px; /* espacio para el botón abajo */
+}
+
 .bubble pre code {
   font-family: 'Consolas', 'Fira Code', monospace;
   font-size: 12px;
@@ -1939,25 +1956,25 @@ body {
 /* ── Code Blocks (Markdown) ── */
 .code-block-wrapper {
   position: relative;
-  margin: 12px 0;
 }
 
 .copy-code-btn {
   position: absolute;
-  top: 6px;
+  bottom: 6px;
   right: 6px;
-  background: var(--bg-surface);
+  background: rgba(0, 0, 0, 0.2);
   border: 1px solid var(--border-subtle);
   border-radius: 6px;
   color: var(--text-secondary);
-  padding: 4px;
+  padding: 6px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   opacity: 0;
-  transition: all 0.2s;
+  transition: all 0.2s ease;
   z-index: 10;
+  backdrop-filter: blur(4px);
 }
 
 .code-block-wrapper:hover .copy-code-btn {
@@ -1965,10 +1982,6 @@ body {
 }
 
 .copy-code-btn:hover {
-  background: var(--bg-hover);
+  background: rgba(255, 255, 255, 0.1);
   color: var(--text-primary);
-}
-
-.code-block-wrapper pre {
-  margin: 0;
 }
