@@ -573,13 +573,13 @@
     <div id="adversarialContent" class="premium-modal" style="max-width: 380px;">
       <div class="modal-header">
         <h3>
-          <svg viewBox="0 0 24 24" fill="none" stroke="#ff4444" stroke-width="2" width="16" height="16"
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"
             style="vertical-align: middle; margin-right: 6px;">
             <circle cx="12" cy="12" r="10" fill="none"></circle>
             <path d="M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20z" fill="none"></path>
-            <circle cx="12" cy="12" r="3" fill="#ff4444" opacity="0.6"></circle>
+            <circle cx="12" cy="12" r="3" fill="currentColor" opacity="0.6"></circle>
           </svg>
-          <span style="color: #ff4444;">Adversarial Lab</span>
+          <span>Adversarial Lab</span>
         </h3>
         <button id="closeAdversarialBtn" class="icon-btn" title="Cerrar">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -592,14 +592,14 @@
 
       <!-- LEGAL DISCLAIMER -->
       <div id="advDisclaimer" class="adv-disclaimer">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#f44336" stroke-width="2" width="16" height="16">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
           <circle cx="12" cy="12" r="10"></circle>
           <line x1="12" y1="8" x2="12" y2="12"></line>
           <line x1="12" y1="16" x2="12.01" y2="16"></line>
         </svg>
         <div>
-          <strong style="color: #f44336;">⚠️ USO RESTRINGIDO</strong>
-          <p style="font-size: 11px; color: #888; margin: 4px 0 0;">Estas herramientas pueden generar tráfico de red y
+          <strong>USO RESTRINGIDO</strong>
+          <p style="font-size: 11px; color: var(--text-secondary); margin: 4px 0 0;">Estas herramientas pueden generar tráfico de red y
             modificar el DOM de la página activa. Úsalas <strong>SOLO</strong> en tus propios proyectos o con
             autorización explícita por escrito.</p>
           <div style="margin-top: 8px;">
@@ -615,33 +615,37 @@
       <!-- Target Info -->
       <div id="advTargetInfo" class="adv-target-info hidden">
         <div style="display: flex; align-items: center; gap: 6px;">
-          <span class="adv-target-icon">🎯</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14" class="adv-target-icon">
+            <circle cx="12" cy="12" r="10"></circle>
+            <circle cx="12" cy="12" r="6"></circle>
+            <circle cx="12" cy="12" r="2"></circle>
+          </svg>
           <span id="advTargetUrl"
-            style="font-size: 11px; color: #aaa; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1;"></span>
+            style="font-size: 11px; color: var(--text-secondary); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1;"></span>
         </div>
-        <div style="display: flex; gap: 6px; margin-top: 6px;">
+        <div style="display: flex; gap: 6px; margin-top: 8px;">
           <span id="advSessionId" class="adv-badge">Sesión: ---</span>
-          <span id="advModeBadge" class="adv-badge adv-badge-safe">🔒 Safe Mode</span>
+          <span id="advModeBadge" class="adv-badge adv-badge-safe">SAFE MODE</span>
         </div>
       </div>
 
       <!-- Safe Mode Toggle -->
       <div class="adv-safe-toggle">
         <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
-          <span style="font-size: 11px; font-weight: 600;">🔒 SAFE MODE</span>
+          <span style="font-size: 11px; font-weight: 600;">SAFE MODE</span>
           <div class="adv-toggle-track" id="advSafeToggle">
             <div class="adv-toggle-thumb" id="advSafeThumb"></div>
           </div>
-          <span style="font-size: 11px; color: #888;">⚡ ACTIVE</span>
+          <span style="font-size: 11px; color: var(--text-secondary);">ACTIVE</span>
         </label>
-        <span style="font-size: 10px; color: #666;">Safe mode = solo genera payloads, no los envía</span>
+        <span style="font-size: 10px; color: var(--text-secondary);">Genera payloads pero no los envía</span>
       </div>
 
       <!-- Tool List (Same layout as White Hat Tools) -->
       <div class="wh-tools-list">
         <button class="wh-tool-btn adv-run-btn" data-adv-tool="sqli">
           <span class="wh-tool-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#ff3333" stroke-width="2" width="18" height="18">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
               <polyline points="23 4 23 10 17 10"></polyline>
               <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
             </svg>
@@ -654,7 +658,7 @@
 
         <button class="wh-tool-btn adv-run-btn" data-adv-tool="xss">
           <span class="wh-tool-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#ffaa00" stroke-width="2" width="18" height="18">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
               <polyline points="16 18 22 12 16 6"></polyline>
               <polyline points="8 6 2 12 8 18"></polyline>
             </svg>
@@ -674,7 +678,7 @@
 
         <button class="wh-tool-btn adv-run-btn" data-adv-tool="ssrf">
           <span class="wh-tool-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#3399ff" stroke-width="2" width="18" height="18">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
               <path d="M5 12h14M12 5l7 7-7 7"></path>
             </svg>
           </span>
@@ -686,7 +690,7 @@
 
         <button class="wh-tool-btn adv-run-btn" data-adv-tool="jwt">
           <span class="wh-tool-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#ffcc00" stroke-width="2" width="18" height="18">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
               <circle cx="12" cy="12" r="10"></circle>
               <circle cx="12" cy="12" r="3"></circle>
             </svg>
@@ -699,7 +703,7 @@
 
         <button class="wh-tool-btn adv-run-btn" data-adv-tool="lfi">
           <span class="wh-tool-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#33ff33" stroke-width="2" width="18" height="18">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
               <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
               <polyline points="14 2 14 8 20 8"></polyline>
             </svg>
@@ -712,7 +716,7 @@
 
         <button class="wh-tool-btn adv-run-btn" data-adv-tool="cmdi">
           <span class="wh-tool-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#ff3333" stroke-width="2" width="18" height="18">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
               <polyline points="16 18 22 12 16 6"></polyline>
               <polyline points="8 6 2 12 8 18"></polyline>
             </svg>
@@ -725,7 +729,7 @@
 
         <button class="wh-tool-btn adv-run-btn" data-adv-tool="cors">
           <span class="wh-tool-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#ffaa00" stroke-width="2" width="18" height="18">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
               <circle cx="12" cy="12" r="10"></circle>
               <line x1="2" y1="12" x2="22" y2="12"></line>
               <path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"></path>
