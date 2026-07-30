@@ -785,7 +785,7 @@ body {
   background: var(--bg-base);
   border: 1px solid var(--border-subtle);
   border-radius: 6px;
-  margin: 10px 0 28px 0;
+  margin: 10px 0;
 }
 
 .bubble .code-block-wrapper pre {
@@ -1959,13 +1959,15 @@ body {
 
 .copy-code-btn {
   position: absolute;
-  bottom: -28px;
-  right: 0;
+  top: 6px;
+  right: 6px;
+  width: 24px;
+  height: 24px;
   background: transparent;
   border: none;
   border-radius: 4px;
   color: var(--text-secondary);
-  padding: 4px;
+  padding: 0;
   cursor: pointer;
   display: flex;
   align-items: center;
