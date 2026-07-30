@@ -1685,6 +1685,10 @@ body {
   border-radius: 4px;
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 51, 51, 0.1);
   padding: 24px;
+  width: 100%;
+  max-width: 360px;
+  max-height: 85vh;
+  overflow-y: auto;
 }
 
 #adversarialContent .modal-header h3 {
