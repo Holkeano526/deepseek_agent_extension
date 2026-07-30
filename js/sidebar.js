@@ -183,9 +183,9 @@ function renderMarkdown(text) {
 
   html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
 
-  html = html.replace(/%%PRE(\d+)%%/g, (_, i) => preBlocks[parseInt(i)]);
-
   html = html.replace(/\n/g, '<br>');
+
+  html = html.replace(/%%PRE(\d+)%%/g, (_, i) => preBlocks[parseInt(i)]);
 
   return html;
 }
