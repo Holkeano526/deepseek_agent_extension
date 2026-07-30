@@ -499,6 +499,7 @@ body {
 }
 
 /* ── Modals ── */
+#adversarialModal,
 #scrapeModal,
 #settingsModal,
 #devToolsModal {
@@ -513,6 +514,7 @@ body {
   padding: 16px;
 }
 
+#adversarialModal.hidden,
 #scrapeModal.hidden,
 #settingsModal.hidden,
 #devToolsModal.hidden {
@@ -613,6 +615,7 @@ body {
   padding-top: 16px;
 }
 
+#adversarialContent.premium-modal,
 #scrapeContent.premium-modal {
   background: var(--bg-surface);
   border: 1px solid var(--border-subtle);
@@ -1318,7 +1321,8 @@ body {
    WHITE HAT EXPLOITATION TOOLS — Styles
    ═══════════════════════════════════════════════════════════ */
 
-#whitehatModal {
+#whitehatModal,
+#devToolsModal {
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.4);
@@ -1330,11 +1334,13 @@ body {
   padding: 16px;
 }
 
-#whitehatModal.hidden {
+#whitehatModal.hidden,
+#devToolsModal.hidden {
   display: none !important;
 }
 
-#whitehatContent.premium-modal {
+#whitehatContent.premium-modal,
+#devToolsContent.premium-modal {
   background: var(--bg-surface);
   border: 1px solid var(--border-subtle);
   border-radius: 12px;
@@ -1654,4 +1660,360 @@ body {
 .dev-action-text span {
   font-size: 11px;
   color: var(--text-secondary);
+}
+
+/* ==========================================================================
+   ADVERSARIAL LAB — Black Hat Testing Tools
+   ========================================================================== */
+
+#adversarialBtn {
+  color: #ff3333;
+  opacity: 0.7;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+#adversarialBtn:hover {
+  opacity: 1;
+  background: rgba(255, 51, 51, 0.1);
+  box-shadow: inset 0 0 0 1px rgba(255, 51, 51, 0.2);
+}
+
+/* Modal Window Override */
+#adversarialContent.premium-modal {
+  background: #0d0d0d;
+  border: 1px solid #2a2a2a;
+  border-radius: 4px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 51, 51, 0.1);
+  padding: 24px;
+}
+
+#adversarialContent .modal-header h3 {
+  font-family: 'Consolas', 'Fira Code', monospace;
+  letter-spacing: -0.5px;
+  text-transform: uppercase;
+}
+
+/* Disclaimer */
+.adv-disclaimer {
+  background: transparent;
+  border: 1px solid #ff3333;
+  border-radius: 2px;
+  padding: 12px;
+  display: flex;
+  gap: 12px;
+  margin-bottom: 12px;
+  position: relative;
+}
+
+.adv-disclaimer::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; width: 4px; height: 100%;
+  background: #ff3333;
+}
+
+.adv-disclaimer svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.adv-disclaimer input[type="checkbox"] {
+  accent-color: #ff3333;
+  cursor: pointer;
+}
+
+/* Target Info */
+.adv-target-info {
+  background: #141414;
+  border: 1px solid #222;
+  border-radius: 2px;
+  padding: 10px 12px;
+  margin-bottom: 12px;
+  font-family: 'Consolas', 'Fira Code', monospace;
+}
+
+.adv-badge {
+  display: inline-block;
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 2px;
+  background: #1a1a1a;
+  border: 1px solid #333;
+  color: #999;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.adv-badge-safe {
+  border-color: #33ff33;
+  color: #33ff33;
+  background: rgba(51, 255, 51, 0.05);
+}
+
+.adv-badge-active {
+  border-color: #ffaa00;
+  color: #ffaa00;
+  background: rgba(255, 170, 0, 0.05);
+}
+
+/* Safe Mode Toggle */
+.adv-safe-toggle {
+  background: #141414;
+  border: 1px solid #222;
+  border-radius: 2px;
+  padding: 10px 12px;
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.adv-toggle-track {
+  width: 40px;
+  height: 20px;
+  border-radius: 10px;
+  background: #2a2a2a;
+  position: relative;
+  cursor: pointer;
+  transition: background 0.2s;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.5);
+}
+
+.adv-toggle-track.active {
+  background: #ffaa00;
+}
+
+.adv-toggle-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #fff;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.5);
+}
+
+.adv-toggle-track.active .adv-toggle-thumb {
+  transform: translateX(20px);
+}
+
+/* Tool Tabs */
+.adv-tabs {
+  display: flex;
+  gap: 0;
+  margin-bottom: 12px;
+  border-bottom: 1px solid #222;
+}
+
+.adv-tab {
+  flex: 1;
+  padding: 8px 4px;
+  font-size: 11px;
+  font-family: 'Consolas', 'Fira Code', monospace;
+  font-weight: 500;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: #666;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.2s;
+  text-transform: uppercase;
+}
+
+.adv-tab:hover {
+  color: #aaa;
+  background: #141414;
+}
+
+.adv-tab-active {
+  color: #ff3333 !important;
+  border-bottom: 2px solid #ff3333;
+  background: linear-gradient(to top, rgba(255,51,51,0.05), transparent) !important;
+}
+
+.adv-tab-content {
+  display: none;
+}
+
+.adv-tab-content-active {
+  display: block !important;
+}
+
+/* Select dropdown */
+.adv-select {
+  width: 100%;
+  padding: 8px;
+  border-radius: 2px;
+  border: 1px solid #333;
+  background: #111;
+  color: #ddd;
+  font-size: 12px;
+  font-family: 'Consolas', 'Fira Code', monospace;
+  outline: none;
+}
+
+.adv-select:focus {
+  border-color: #ff3333;
+}
+
+/* Run button */
+.adv-run-btn {
+  background: #1a1a1a !important;
+  border: 1px solid #ff3333 !important;
+  color: #ff3333 !important;
+  border-radius: 2px !important;
+  font-family: 'Consolas', 'Fira Code', monospace !important;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.2s !important;
+}
+
+.adv-run-btn:hover {
+  background: #ff3333 !important;
+  color: #000 !important;
+  box-shadow: 0 0 10px rgba(255, 51, 51, 0.3);
+}
+
+.adv-run-btn:disabled {
+  opacity: 0.4 !important;
+  border-color: #555 !important;
+  color: #555 !important;
+  cursor: not-allowed !important;
+  background: #1a1a1a !important;
+  box-shadow: none !important;
+}
+
+/* Results */
+.adv-results-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid #222;
+  margin-bottom: 8px;
+  font-family: 'Consolas', 'Fira Code', monospace;
+}
+
+.adv-finding-card {
+  background: #141414;
+  border: 1px solid #222;
+  border-radius: 2px;
+  margin-bottom: 4px;
+  padding: 8px 10px;
+  cursor: pointer;
+  font-size: 11px;
+  border-left: 3px solid transparent;
+  transition: all 0.15s;
+}
+
+.adv-finding-card:hover {
+  background: #1a1a1a;
+  border-color: #333;
+}
+
+.adv-finding-card .adv-finding-title {
+  color: #ddd;
+  font-family: 'Consolas', 'Fira Code', monospace;
+  font-weight: 500;
+}
+
+.adv-finding-card .adv-finding-severity {
+  font-size: 9px;
+  font-weight: 700;
+  padding: 2px 4px;
+  border-radius: 2px;
+  text-transform: uppercase;
+  margin-left: 6px;
+  letter-spacing: 0.5px;
+}
+
+.adv-finding-severity.critical {
+  background: #ff3333;
+  color: #000;
+}
+
+.adv-finding-severity.high {
+  background: #ffaa00;
+  color: #000;
+}
+
+.adv-finding-severity.medium {
+  background: #ffcc00;
+  color: #000;
+}
+
+.adv-finding-severity.low {
+  background: #33ff33;
+  color: #000;
+}
+
+.adv-finding-severity.info {
+  background: #3399ff;
+  color: #000;
+}
+
+.adv-finding-detail {
+  margin-top: 6px;
+  font-size: 11px;
+  color: #888;
+  line-height: 1.4;
+}
+
+.adv-finding-payload {
+  display: block;
+  margin-top: 6px;
+  font-family: 'Consolas', 'Fira Code', monospace;
+  font-size: 10px;
+  padding: 6px 8px;
+  background: #0a0a0a;
+  border: 1px solid #222;
+  border-radius: 2px;
+  color: #ff3333;
+  word-break: break-all;
+  max-height: 80px;
+  overflow-y: auto;
+}
+
+/* Logs */
+.adv-log-entry {
+  padding: 4px 0;
+  border-bottom: 1px solid #1a1a1a;
+  font-family: 'Consolas', 'Fira Code', monospace;
+  font-size: 10px;
+}
+
+.adv-log-entry.info {
+  color: #777;
+}
+
+.adv-log-entry.success {
+  color: #33ff33;
+}
+
+.adv-log-entry.warn {
+  color: #ffaa00;
+}
+
+.adv-log-entry.error {
+  color: #ff3333;
+}
+
+/* Footer */
+.adv-footer-note {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 12px;
+  font-size: 10px;
+  color: #555;
+  padding-top: 8px;
+  border-top: 1px solid #222;
+  font-family: 'Consolas', 'Fira Code', monospace;
+}
+
+.adv-footer-note svg {
+  flex-shrink: 0;
 }
