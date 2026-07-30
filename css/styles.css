@@ -1935,3 +1935,40 @@ body {
 .adv-footer-note svg {
   flex-shrink: 0;
 }
+
+/* ── Code Blocks (Markdown) ── */
+.code-block-wrapper {
+  position: relative;
+  margin: 12px 0;
+}
+
+.copy-code-btn {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 6px;
+  color: var(--text-secondary);
+  padding: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: all 0.2s;
+  z-index: 10;
+}
+
+.code-block-wrapper:hover .copy-code-btn {
+  opacity: 1;
+}
+
+.copy-code-btn:hover {
+  background: var(--bg-hover);
+  color: var(--text-primary);
+}
+
+.code-block-wrapper pre {
+  margin: 0;
+}
