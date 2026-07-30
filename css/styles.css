@@ -785,8 +785,7 @@ body {
   background: var(--bg-base);
   border: 1px solid var(--border-subtle);
   border-radius: 6px;
-  margin: 10px 0;
-  overflow: hidden;
+  margin: 10px 0 28px 0;
 }
 
 .bubble .code-block-wrapper pre {
@@ -794,6 +793,7 @@ body {
   border: none;
   margin: 0;
   padding: 12px;
+  overflow-x: auto;
 }
 
 .bubble pre code {
@@ -1959,8 +1959,8 @@ body {
 
 .copy-code-btn {
   position: absolute;
-  bottom: 8px;
-  right: 8px;
+  bottom: -28px;
+  right: 0;
   background: transparent;
   border: none;
   border-radius: 4px;
@@ -1971,7 +1971,7 @@ body {
   align-items: center;
   justify-content: center;
   opacity: 0;
-  transition: all 0.2s ease;
+  transition: all 0.2s ease, transform 0.1s;
   z-index: 10;
 }
 
@@ -1982,4 +1982,8 @@ body {
 .copy-code-btn:hover {
   background: rgba(255, 255, 255, 0.1);
   color: var(--text-primary);
+}
+
+.copy-code-btn:active {
+  transform: scale(0.95);
 }
