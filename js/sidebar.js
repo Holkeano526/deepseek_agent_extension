@@ -1349,6 +1349,9 @@ function updateModeBadge() {
 
 document.querySelectorAll('.adv-run-btn').forEach(btn => {
   btn.addEventListener('click', async (e) => {
+    // Evitar ejecutar si se hizo clic en un select o sus opciones (propagación de eventos)
+    if (e.target.closest('select')) return;
+
     if (!advSessionActive) {
       showAdvStatus('Acepta el disclaimer primero');
       return;
