@@ -551,10 +551,20 @@ async function extractPageContent() {
     const result = await getPageContent();
     if (result.content) {
       cachedPageContent = result.content;
-      pageStatus.textContent = result.content.length + ' caracteres';
+      
+      // Determinar qué mostrar
+      let displayTitle = result.title || result.url || 'Página Actual';
+      const maxLength = 35;
+      if (displayTitle.length > maxLength) {
+        displayTitle = displayTitle.substring(0, maxLength) + '...';
+      }
+      
+      pageStatus.textContent = `${displayTitle} (${result.content.length} caracteres)`;
+      pageStatus.title = result.url || '';
     } else {
       cachedPageContent = '';
       pageStatus.textContent = 'No disponible';
+      pageStatus.title = '';
     }
   } finally {
     contextBar?.classList.remove('scanning');

@@ -23,6 +23,18 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     handlePentestCDPQuery(request, sendResponse);
     return true;
   }
+  if (request.type === 'adversarial-eval') {
+    handleAdversarialEval(request, sendResponse);
+    return true;
+  }
+  if (request.type === 'adversarial-probe') {
+    handleAdversarialProbe(request, sendResponse);
+    return true;
+  }
+  if (request.type === 'adversarial-get-tab-info') {
+    handleGetTabInfo(sendResponse);
+    return true;
+  }
 });
 
 // =============================================================================
@@ -787,15 +799,16 @@ function scrapeFn() {
 async function handleGetPageContent(sendResponse) {
   try {
     const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-    if (!tab?.id || !tab?.url) { sendResponse({ content: '' }); return; }
+    if (!tab?.id || !tab?.url) { sendResponse({ content: '', url: '', title: '' }); return; }
+    const tabInfo = { url: tab.url, title: tab.title };
     try {
       const result = await chrome.tabs.sendMessage(tab.id, { type: 'getPageContent' });
-      if (result?.content) { sendResponse(result); return; }
+      if (result?.content) { sendResponse({ ...result, ...tabInfo }); return; }
     } catch (_) { }
     try {
       const results = await chrome.scripting.executeScript({ target: { tabId: tab.id }, func: () => document.body?.innerText?.slice(0, 80000) || '' });
-      sendResponse({ content: results[0]?.result || '' });
-    } catch (e) { sendResponse({ content: '', error: e.message }); }
+      sendResponse({ content: results[0]?.result || '', ...tabInfo });
+    } catch (e) { sendResponse({ content: '', error: e.message, ...tabInfo }); }
   } catch (e) { sendResponse({ content: '', error: e.message }); }
 }
 
@@ -824,4 +837,120 @@ async function handleDevToolsQuery(query, params, sendResponse) {
       sendResponse({ result });
     } catch (err) { try { await chrome.debugger.detach(target); } catch (_) { } throw err; }
   } catch (e) { sendResponse({ error: e.message }); }
+}
+
+// =============================================================================
+// ADVERSARIAL LAB — Handlers
+// =============================================================================
+
+// Handle CDP evaluation for adversarial tools
+async function handleAdversarialEval(request, sendResponse) {
+  try {
+    const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+    if (!tab?.id) { sendResponse({ error: 'No active tab' }); return; }
+    const target = { tabId: tab.id };
+    try { await chrome.debugger.attach(target, '1.3'); } catch (e) {
+      if (!e.message.includes('Already attached')) throw e;
+    }
+    try {
+      const evalResult = await chrome.debugger.sendCommand(target, 'Runtime.evaluate', {
+        expression: request.expression || '',
+        returnByValue: false,
+        awaitPromise: true,
+        timeout: 10000
+      });
+      const raw = evalResult?.result?.value;
+      let result = null;
+      if (raw && raw !== 'undefined') {
+        try { result = JSON.parse(raw); } catch (e) { result = raw; }
+      }
+      await chrome.debugger.detach(target);
+      sendResponse({ result });
+    } catch (err) {
+      try { await chrome.debugger.detach(target); } catch (_) { }
+      sendResponse({ error: err.message });
+    }
+  } catch (e) {
+    sendResponse({ error: e.message });
+  }
+}
+
+// Handle HTTP probe for adversarial tools (fetch via CDP)
+async function handleAdversarialProbe(request, sendResponse) {
+  try {
+    const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+    if (!tab?.id) { sendResponse({ error: 'No active tab' }); return; }
+
+    const target = { tabId: tab.id };
+    try { await chrome.debugger.attach(target, '1.3'); } catch (e) {
+      if (!e.message.includes('Already attached')) throw e;
+    }
+
+    try {
+      // Use CDP to make a fetch request from the page context
+      const code = `
+        (async () => {
+          try {
+            const controller = new AbortController();
+            const timeout = setTimeout(() => controller.abort(), ${request.timeout || 8000});
+            const response = await fetch(${JSON.stringify(request.url)}, {
+              method: 'GET',
+              signal: controller.signal,
+              cache: 'no-store',
+              mode: 'cors',
+              headers: { 'Accept': 'text/html,application/json,*/*' }
+            });
+            clearTimeout(timeout);
+            const text = await response.text();
+            return JSON.stringify({
+              status: response.status,
+              ok: response.ok,
+              body: text.substring(0, 5000)
+            });
+          } catch(e) {
+            return JSON.stringify({ error: e.message, body: '' });
+          }
+        })()
+      `;
+
+      const evalResult = await chrome.debugger.sendCommand(target, 'Runtime.evaluate', {
+        expression: code,
+        returnByValue: false,
+        awaitPromise: true,
+        timeout: (request.timeout || 8000) + 2000
+      });
+
+      const raw = evalResult?.result?.value;
+      let result = { body: '' };
+      if (raw && raw !== 'undefined') {
+        try { result = JSON.parse(raw); } catch (e) { result = { body: raw }; }
+      }
+
+      await chrome.debugger.detach(target);
+      sendResponse(result);
+    } catch (err) {
+      try { await chrome.debugger.detach(target); } catch (_) { }
+      sendResponse({ error: err.message, body: '' });
+    }
+  } catch (e) {
+    sendResponse({ error: e.message, body: '' });
+  }
+}
+
+// Get current tab info for adversarial session
+async function handleGetTabInfo(sendResponse) {
+  try {
+    const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+    if (!tab?.id) {
+      sendResponse({ error: 'No active tab' });
+      return;
+    }
+    sendResponse({
+      url: tab.url || '',
+      title: tab.title || '',
+      id: tab.id
+    });
+  } catch (e) {
+    sendResponse({ error: e.message });
+  }
 }
