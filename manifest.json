@@ -8,7 +8,8 @@
     "storage",
     "activeTab",
     "scripting",
-    "debugger"
+    "debugger",
+    "webRequest"
   ],
   "host_permissions": [
     "<all_urls>",

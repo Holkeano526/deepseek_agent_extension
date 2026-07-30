@@ -41,6 +41,23 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   }
 });
 
+const activeM3u8Urls = {};
+
+chrome.webRequest.onBeforeRequest.addListener(
+  (details) => {
+    if (details.url.includes('.m3u8')) {
+      if (details.tabId >= 0) {
+        activeM3u8Urls[details.tabId] = details.url;
+      }
+    }
+  },
+  { urls: ["<all_urls>"] }
+);
+
+chrome.tabs.onRemoved.addListener((tabId) => {
+  delete activeM3u8Urls[tabId];
+});
+
 // =============================================================================
 // PENTESTING ENGINE — Passive Security Analysis (Read-Only)
 // =============================================================================
@@ -821,24 +838,28 @@ async function handleExtractM3u8(sendResponse) {
     const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
     if (!tab?.id) { sendResponse({ error: 'No active tab found' }); return; }
     
-    const results = await chrome.scripting.executeScript({
-      target: { tabId: tab.id },
-      func: () => {
-        const sourceElement = document.querySelector('video source[src$=".m3u8"]') ||
-                              document.querySelector('video source[type="application/x-mpegURL"]');
-        if (sourceElement && sourceElement.src) {
-          return sourceElement.src;
+    let url = activeM3u8Urls[tab.id];
+
+    if (!url) {
+      const results = await chrome.scripting.executeScript({
+        target: { tabId: tab.id },
+        func: () => {
+          const sourceElement = document.querySelector('video source[src$=".m3u8"]') ||
+                                document.querySelector('video source[type="application/x-mpegURL"]');
+          if (sourceElement && sourceElement.src) {
+            return sourceElement.src;
+          }
+          return null;
         }
-        return null;
-      }
-    });
+      });
+      url = results[0]?.result;
+    }
     
-    const url = results[0]?.result;
     if (url) {
       const command = `ffmpeg -i "${url}" -c copy -bsf:a aac_adtstoasc video_descargado.mp4`;
       sendResponse({ result: command, url: url });
     } else {
-      sendResponse({ error: 'No se encontró ningún enlace m3u8 en los elementos <video> de la página.' });
+      sendResponse({ error: 'No se encontró ningún enlace m3u8. Intenta reproducir el video primero para que la extensión capture la URL de red fresca.' });
     }
   } catch (e) {
     sendResponse({ error: e.message });
