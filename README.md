@@ -12,14 +12,14 @@ DeepSeek Agent is a Chrome extension that provides an AI agent within a sidebar.
 ## Features
 
 - **Sidebar Integration:** Access the AI assistant directly from the Chrome sidebar without switching tabs.
-- **Context-Aware Assistance:** The agent reads the current page and provides relevant summaries, data extraction, and explanations.
-- **Developer & Security Tools:** Includes built-in developer options and security scanning tools (like HSTS and Mixed Content checks).
-- **Customizable Interface:** Clean, responsive UI with settings for different models (e.g., DeepSeek Flash).
+- **Context-Aware Assistance:** The agent reads the current page and provides relevant summaries, data extraction (including HLS/m3u8 video streams), and explanations.
+- **Developer & Security Tools:** Includes built-in developer options, White Hat exploitation tools, and an **Adversarial Lab** for advanced testing (XSS, SSRF, JWT, SQLi).
+- **Customizable Interface:** Clean, responsive UI with settings for different models (e.g., DeepSeek Flash) and markdown support with copyable code blocks.
 
 ## Structure
 
 - `assets/icons/`: Contains extension icons and logos.
-- `js/`: Contains the extension logic (`background.js`, `content.js`, `sidebar.js`).
+- `js/`: Contains the extension logic (`background.js`, `content.js`, `sidebar.js`) and the new security testing engine (`adversarial-engine.js`, `adversarial-payloads.js`).
 - `css/`: Contains the styling for the sidebar.
 - `sidebar.html`: The main entry point for the extension's side panel UI.
 - `manifest.json`: The Chrome extension configuration file.
