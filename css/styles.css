@@ -1819,7 +1819,7 @@ body {
 }
 
 .adv-select:focus {
-  border-color: #ff3333;
+  border-color: var(--accent);
 }
 
 /* Results */
