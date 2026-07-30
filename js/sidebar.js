@@ -724,6 +724,14 @@ FORMATO DE RESPUESTA:
           required: ['url', 'frameId']
         }
       }
+    },
+    {
+      type: 'function',
+      function: {
+        name: 'extract_m3u8_video',
+        description: 'Extrae el enlace del video m3u8 (HLS) de la pagina web actual y genera el comando FFmpeg para descargarlo.',
+        parameters: { type: 'object', properties: {} }
+      }
     }
   ];
 
@@ -825,11 +833,20 @@ FORMATO DE RESPUESTA:
       }
 
       let toolResult = '';
-      try {
-        const resp = await chrome.runtime.sendMessage({ type: 'devtools-query', query, params });
-        toolResult = resp.result ? JSON.stringify(resp.result) : (resp.error || 'No data');
-      } catch (e) {
-        toolResult = e.message || String(e);
+      if (tc.function.name === 'extract_m3u8_video') {
+        try {
+          const resp = await chrome.runtime.sendMessage({ type: 'extract-m3u8' });
+          toolResult = resp.result ? `URL M3U8 encontrada: ${resp.url}\n\nComando FFmpeg listo para ejecutar:\n${resp.result}` : (resp.error || 'No se encontró video m3u8 en la página actual.');
+        } catch (e) {
+          toolResult = e.message || String(e);
+        }
+      } else {
+        try {
+          const resp = await chrome.runtime.sendMessage({ type: 'devtools-query', query, params });
+          toolResult = resp.result ? JSON.stringify(resp.result) : (resp.error || 'No data');
+        } catch (e) {
+          toolResult = e.message || String(e);
+        }
       }
 
       messages.push({

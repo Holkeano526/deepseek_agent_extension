@@ -15,6 +15,10 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     handleDevToolsQuery(request.query, request.params, sendResponse);
     return true;
   }
+  if (request.type === 'extract-m3u8') {
+    handleExtractM3u8(sendResponse);
+    return true;
+  }
   if (request.type === 'pentest-scan') {
     handlePentestScan(request.modules, sendResponse);
     return true;
@@ -810,6 +814,35 @@ async function handleGetPageContent(sendResponse) {
       sendResponse({ content: results[0]?.result || '', ...tabInfo });
     } catch (e) { sendResponse({ content: '', error: e.message, ...tabInfo }); }
   } catch (e) { sendResponse({ content: '', error: e.message }); }
+}
+
+async function handleExtractM3u8(sendResponse) {
+  try {
+    const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+    if (!tab?.id) { sendResponse({ error: 'No active tab found' }); return; }
+    
+    const results = await chrome.scripting.executeScript({
+      target: { tabId: tab.id },
+      func: () => {
+        const sourceElement = document.querySelector('video source[src$=".m3u8"]') ||
+                              document.querySelector('video source[type="application/x-mpegURL"]');
+        if (sourceElement && sourceElement.src) {
+          return sourceElement.src;
+        }
+        return null;
+      }
+    });
+    
+    const url = results[0]?.result;
+    if (url) {
+      const command = `ffmpeg -i "${url}" -c copy -bsf:a aac_adtstoasc video_descargado.mp4`;
+      sendResponse({ result: command, url: url });
+    } else {
+      sendResponse({ error: 'No se encontró ningún enlace m3u8 en los elementos <video> de la página.' });
+    }
+  } catch (e) {
+    sendResponse({ error: e.message });
+  }
 }
 
 async function handleDevToolsQuery(query, params, sendResponse) {
