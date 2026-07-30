@@ -794,7 +794,7 @@ body {
   background: transparent;
   border: none;
   margin: 0;
-  padding: 12px;
+  padding: 12px 36px 12px 12px;
   overflow-x: auto;
 }
 
