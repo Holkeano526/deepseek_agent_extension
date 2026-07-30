@@ -787,6 +787,7 @@ body {
   border-radius: 6px;
   margin: 10px 0;
   overflow: hidden;
+  white-space: normal;
 }
 
 .bubble .code-block-wrapper pre {
